@@ -24,6 +24,14 @@ boolean IRVector::is_right_clear() {
   return digitalRead(m_r);
 }
 
+boolean IRVector::is_front_left_clear() {
+  return digitalRead(m_cl);
+}
+
+boolean IRVector::is_front_right_clear() {
+  return digitalRead(m_cr);
+}
+
 boolean IRVector::is_front_clear() {
   return digitalRead(m_cl) &&
          digitalRead(m_cr);

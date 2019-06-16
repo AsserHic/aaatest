@@ -34,12 +34,10 @@ void setup() {
  This function is called in an infinite loop forever.
  */
 void loop() {
-  boolean clear_l;
-  boolean clear_r;
+  boolean clear_l = irv.is_left_clear();
+  boolean clear_r = irv.is_right_clear();
 
   if (irv.is_front_clear()) {
-    clear_l = irv.is_left_clear();
-    clear_r = irv.is_right_clear();
     if (clear_l && clear_r) {
       motors.forward();
     } else
@@ -50,19 +48,26 @@ void loop() {
       motors.toRight();
     } else {
       front_obstacle();
-      return;
     }
   } else {
-    front_obstacle();
-    return;
+    if (clear_l && irv.is_front_left_clear()) {
+      motors.turn(false);
+    } else
+    if (clear_r && irv.is_front_right_clear()) {
+      motors.turn(true);
+    } else {
+      front_obstacle();
+    }
   }
 
   delay(50);
 }
 
 void front_obstacle() {
+  motors.rest();
+  delay(50);
   motors.backward();
   delay(random(100, 2000));
-  motors.turn(random(0, 1) < 1);
+  motors.turn(random(0, 2) < 1);
   delay(random(300, 1000));
 }

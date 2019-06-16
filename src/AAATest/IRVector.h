@@ -21,6 +21,10 @@ class IRVector {
 
      boolean is_right_clear();
 
+     boolean is_front_left_clear();
+
+     boolean is_front_right_clear();
+
      boolean is_front_clear();
 
 };
