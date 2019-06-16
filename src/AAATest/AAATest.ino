@@ -42,22 +42,22 @@ void loop() {
     clear_r = irv.is_right_clear();
     if (clear_l && clear_r) {
       motors.forward();
-      delay(100);
     } else
     if (clear_l && !clear_r) {
-      motors.to_left();
-      delay(100);
+      motors.toLeft();
     } else
     if (!clear_l && clear_r) {
-      motors.to_right();
-      delay(100);
+      motors.toRight();
     } else {
       front_obstacle();
+      return;
     }
-
   } else {
     front_obstacle();
+    return;
   }
+
+  delay(50);
 }
 
 void front_obstacle() {

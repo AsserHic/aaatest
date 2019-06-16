@@ -16,43 +16,45 @@ MotorControl::MotorControl(int l1, int l2, int r1, int r2) {
   pinMode(m_r2, OUTPUT);
 }
 
+void MotorControl::setState(boolean l1, boolean l2, boolean r1, boolean r2) {
+  boolean wait = false;
+  if (l1 && m_state[1]) { digitalWrite(m_l2, LOW); wait = true; }
+  if (l2 && m_state[0]) { digitalWrite(m_l1, LOW); wait = true; }
+  if (r1 && m_state[3]) { digitalWrite(m_r2, LOW); wait = true; }
+  if (r2 && m_state[2]) { digitalWrite(m_r1, LOW); wait = true; }
+  if (wait) {
+    delay(10); // Let the high pins cool down.
+  }
+  digitalWrite(m_l1, l1); m_state[0] = l1;
+  digitalWrite(m_l2, l2); m_state[1] = l2;
+  digitalWrite(m_r1, r1); m_state[2] = r1;
+  digitalWrite(m_r2, r2); m_state[3] = r2;
+}
+
 void MotorControl::backward() {
-  rest();
-  digitalWrite(m_l2, HIGH);
-  digitalWrite(m_r2, HIGH);
+  setState(false, true, false, true);
 }
 
 void MotorControl::rest() {
-  digitalWrite(m_l1, LOW);
-  digitalWrite(m_l2, LOW);
-  digitalWrite(m_r1, LOW);
-  digitalWrite(m_r2, LOW);
-  delay(10);
+  setState(false, false, false, false);
 }
 
 void MotorControl::forward() {
-  rest();
-  digitalWrite(m_l1, HIGH);
-  digitalWrite(m_r1, HIGH);
+  setState(true, false, true, false);
 }
 
-void MotorControl::to_left() {
-  rest();
-  digitalWrite(m_r1, HIGH);
+void MotorControl::toLeft() {
+  setState(false, false, true, false);
 }
 
-void MotorControl::to_right() {
-  rest();
-  digitalWrite(m_l1, HIGH);
+void MotorControl::toRight() {
+  setState(true, false, false, false);
 }
 
 void MotorControl::turn(boolean right) {
-  rest();
   if (right) {
-    digitalWrite(m_l1, HIGH);
-    digitalWrite(m_r2, HIGH);
+    setState(true, false, false, true);
   } else {
-    digitalWrite(m_r1, HIGH);
-    digitalWrite(m_l2, HIGH);    
+    setState(false, true, true, false);
   }
 }

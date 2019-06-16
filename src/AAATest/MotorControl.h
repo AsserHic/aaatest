@@ -12,7 +12,11 @@ class MotorControl {
      int m_l2; // Left motors pin #2
      int m_r1; // Right motors pin #1
      int m_r2; // Right motors pin #2
-  
+
+     boolean m_state[4] = { false, false, false, false };
+
+     void setState(boolean l1, boolean l2, boolean r1, boolean r2);
+
   public:
 
      MotorControl(int l1, int l2, int r1, int r2);
@@ -23,9 +27,9 @@ class MotorControl {
      
      void forward();
 
-     void to_left();
+     void toLeft();
      
-     void to_right();
+     void toRight();
 
      void turn(boolean right);
 
