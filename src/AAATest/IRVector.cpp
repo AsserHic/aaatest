@@ -2,6 +2,7 @@
 // IRVector.cpp
 
 #include "Arduino.h"
+
 #include "IRVector.h"
 
 IRVector::IRVector(int l, int cl, int cr, int r) {
