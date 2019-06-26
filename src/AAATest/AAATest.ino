@@ -28,7 +28,7 @@ const int SPEAKER = 6;
 const int HUMAN_SENSOR = 8;
 
 AnalogSpeaker speaker = AnalogSpeaker(SPEAKER);
-HumanDetector user    = HumanDetector(HUMAN_SENSOR, 10000);
+HumanDetector user    = HumanDetector(HUMAN_SENSOR, 5000);
 IRVector      irv     = IRVector(IR_L, IR_CL, IR_CR, IR_R);
 MotorControl  motors  = MotorControl(MOTOR_L1, MOTOR_L2, MOTOR_R1, MOTOR_R2);
 boolean       wait    = true;

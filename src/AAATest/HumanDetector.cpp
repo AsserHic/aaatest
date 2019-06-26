@@ -21,10 +21,10 @@ int HumanDetector::check() {
     if (m_lastSeen < 1) {
        result = 1;
     }
-    m_lastSeen = millis();
+    m_lastSeen = millis() + m_maxAway;
   } else {    
     if ((m_lastSeen > 0) &&
-        ((m_lastSeen) < millis())) {
+        (m_lastSeen < millis())) {
        m_lastSeen = 0;
        result     = -1;
     }
