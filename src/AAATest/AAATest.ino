@@ -69,8 +69,7 @@ void drive() {
 
   if (!clear_l && !clear_r) {
     front_obstacle();
-  } else
-  if (irv.is_front_clear()) {
+  } else if (irv.is_front_clear()) {
     if (clear_l && clear_r) {
       motors.forward();
     } else
@@ -79,8 +78,6 @@ void drive() {
     } else
     if (!clear_l && clear_r) {
       motors.toRight();
-    } else {
-      front_obstacle();
     }
   } else {
     if (clear_l && irv.is_front_left_clear()) {
