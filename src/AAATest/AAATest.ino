@@ -37,7 +37,7 @@ boolean       wait    = true;
  This routine is executed once for the beginning.
  */
 void setup() {
-  wait = true;
+  wait = false;
   motors.rest();
   speaker.beep();
 }
@@ -59,8 +59,6 @@ void loop() {
              wait = false;
              break;
   }
-
-  delay(50);
 }
 
 void drive() {
@@ -70,14 +68,13 @@ void drive() {
   if (!clear_l && !clear_r) {
     front_obstacle();
   } else if (irv.is_front_clear()) {
-    if (clear_l && clear_r) {
-      motors.forward();
-    } else
     if (clear_l && !clear_r) {
       motors.toLeft();
     } else
     if (!clear_l && clear_r) {
       motors.toRight();
+    } else {
+      motors.forward();
     }
   } else {
     if (clear_l && irv.is_front_left_clear()) {
